@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gift-cms",
+  "private_key_id": "a7aee74dc932632fd422d7b187cff1e643eb9c9d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDQ4wRlTxgNifN2\nKhxlxb5/x2UEtfo30K/SQr7FWbXblr76N+hcxWEiW5sgUQuQvN6s7z4bPljJpQeB\nnNXvQd5H0l6RB+M/RNe2jMhV0yB1QnVOERh54RMRupEYCihH0/Jvnambgn17OHs1\nkJtM73SjX0nB0CbJrBz1Vx6Hnld9sDm2kiXBcl6dJ/IymQVDynvRt1UPypE900/F\n/6UVUhpEGKOFdYZK3NVenRIy+QOYuYZPxUYJMgKefWFX1DPGRXmMhQcUq8T7r7+P\ndZXT3aLUS2zwrdozcbMuLUap6STLmTxqHyfASxx2ZC5iRDjsLYtoLBaGBRFoFNOJ\nemXT7tj5AgMBAAECggEAE6NnZ2R/PQHQmALJHRXxNsj21oske7J5kfzHO+PKQcHM\n/jza8jxDfI88nCL8Dl7jV6jXOVWsOhDzQRx1Z7ZummjM9GxxN4jv96NwT9LqK0jU\n1HXg/wLJ3/g4g36sK//HvClup6y/ju62QeJXGqDGLqt0hYcqdMb8osg1AGHcYd5P\nuLoa8mzefQy2MfxadatIYafmY9tZCs7R8TaGEljqdBY/1iC+mQDhJhzpDqYMvLsT\nH8X7/k19tstnhSbYP0NfZ7NMP9z/IFvxonJ0xa+3DyJD45NVKOV992VzF7wboXQQ\nLGM8237vrKoMFCEdsI4COSqyAQKOkOV+5fZuVDgzjQKBgQD41hx1RavGUBlPkhTy\nkKVy1iq384jfrjWADhQfikGNp/cILGFvNNrno8QNfcZ34WDLDn6NsiaO/3u/ratp\n+sXm6PUJiJr6ICrQncVLeqVDSBisXPVstd+rg+T8swoCPLD7YXvFBUcJ5pGF2DI2\nw4qQin8m21WHHnr0abUw0LT5cwKBgQDW5nuz3lRONtY1uRky5jo29HloaVMD8jnr\n3uPl5pS7s4+GE2jvsx4iUqpRjNtzizZ3xwSZsrtHKx8NPsPTAYlAOkPERxFCGL4y\nS58wJEy+KTcOR8BXYH4GkIm3clSNzDzr5dHYCNABKTu89z6l293bFPsKjYlbjy0r\n2rgGIGm44wKBgEt1kpe1kwvGioZoxFVyq9mRPM8f2SgLykmU+2E9KfftMaqW2s1A\neAm6zd9RfvgnrpSlRpdtqOfAbiSIY+z1kUIe7v//HxAu5Qzyazwiay9mE6VhY0Oe\nO7/ldXF0Udqv0PPKciAjI5HLC+JM151n2wNOHJUJ+nvJMHwh+kJdaCQlAoGBAI68\nDYO9cw90GrkaFSOaiSYBITZ5ZlsjotcIdyQ3D6jQLc7my3cR6Dzx3RBHV2caGvZZ\naLPRY9R0Tq6UdqqKxae0S1htv4fAOWvckIIASjyv0VKZ06X1gB9KFz6SIJkCA6DH\nR6aOy+FJitUK/0BYlbWy7L7onUgEBAOxxTLEipPzAoGAO6SmxjuLJ/eiQOwVrNAR\nhTpzozfPdxTwK5aYjAYZ+3dvCb0HKdWQBYwG6helnIhs5H4uBUgnfrDre3VhaHTp\nnIRbgOnS9I6YsA1iMVGH27ASwdWDUQmlsLBbZFb21cx3+Lxjt//n76sthjkgbf2S\nCuQSSiKjN6zUXluoPQAUoY4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "cms-947@gift-cms.iam.gserviceaccount.com",
+  "client_id": "111502571153441133735",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cms-947%40gift-cms.iam.gserviceaccount.com"
+}

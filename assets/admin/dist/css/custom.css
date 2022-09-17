@@ -1,0 +1,16 @@
+.card {
+    border-radius: 8px;
+}
+a {
+    color: #03A8F3;
+}
+
+a:hover {
+    color: #03A8F3;
+}
+.infoHead {
+    padding: 15px 0px;
+}
+.infoTable {
+    font-size: 1rem;
+}
