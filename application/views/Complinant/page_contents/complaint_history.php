@@ -5,6 +5,7 @@
 				<h4 class="text-themecolor">Complaint History</h4>
 			</div>
 		</div>
+		<?php?>
 		<div class="card">
 			<div class="card-body">
 				<div class="vtabs customvtab">
