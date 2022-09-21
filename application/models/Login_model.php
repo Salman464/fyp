@@ -11,6 +11,24 @@ class Login_model extends CI_Model
 		$this->db->where('user_id', $user); // where username is equal to $username
 		$this->db->where('password', $password); // and password is equal to  $password (md5 format)
 		$query = $this->db->get(); //get data from DB
+		
+		if($query->num_rows() > 0)
+		{
+			return $query;
+		}
+		elseif($query->num_rows()==0)
+		{
+			$this->db->select('*'); //select all
+			$this->db->from('user'); // table name
+			$this->db->where('user_id', $user); // where username is equal to $username
+			$query2 = $this->db->get(); //get data from DB
+
+			$pass=$query2->row_array()['password'];
+			if($password == $this->encrypt->decode($pass))
+			{
+				return $query;
+			}
+		}
 		return $query;
 	}
 
@@ -21,6 +39,24 @@ class Login_model extends CI_Model
 		$this->db->where('technician_id', $user); // where username is equal to $username
 		$this->db->where('password', $password); // and password is equal to  $password (md5 format)
 		$query = $this->db->get(); //get data from DB
+		
+		if($query->num_rows() > 0)
+		{
+			return $query;
+		}
+		elseif($query->num_rows()==0)
+		{
+			$this->db->select('*'); //select all
+			$this->db->from('technician'); // table name
+			$this->db->where('technician_id', $user); // where username is equal to $username
+			$query2 = $this->db->get(); //get data from DB
+
+			$pass=$query2->row_array()['password'];
+			if($password == $this->encrypt->decode($pass))
+			{
+				return $query2;
+			}
+		}
 		return $query;
 	}
 

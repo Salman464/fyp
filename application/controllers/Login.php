@@ -8,10 +8,12 @@ class Login extends CI_Controller
 		parent::__construct();
 		$this->load->model('Login_model');
 		$this->load->model('email_model');
+		$this->load->library('encryption');
 	}
 
 	public function index()
 	{
+		
 		if($this->session->userdata('logged_in'))
             {
 	          $user_type = $this->session->userdata('user_type');
@@ -190,7 +192,7 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 				'phone_number' => $this->input->post('phone_number'),
 				'ext' => $this->input->post('ext'),
 				'email' => $this->input->post('email'),
-				'password' => $this->input->post('password')
+				'password' => $this->encrypt->encode($this->input->post('password'))
 			);
 
 			$create = $this->Login_model->create($data);
