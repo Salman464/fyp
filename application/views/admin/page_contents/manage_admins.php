@@ -22,7 +22,7 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<div class="col-md-12 m-b-20">
-									<input type="number" pattern="\d*" onKeyPress="if(this.value.length==15) return false;" name="id" class="form-control" placeholder="ID" required>
+									<input type="number" pattern="\d*" onKeyPress="if(this.value >=2147483647) return false;" name="id" class="form-control" placeholder="ID" required>
 								</div>
 								<div class="col-md-12 m-b-20">
 									<select name="adminType" required class="form-control custom-select" required>
@@ -63,12 +63,12 @@
 		</div>
 		<?php if ($this->session->flashdata('errors')) { ?>
 			<div class="alert alert-danger alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><?php echo "Error: Email is already registered, use another email!"; ?>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><?php echo $this->session->flashdata('errors');$this->session->set_flashdata('errors', ''); ?>
 			</div>
 		<?php } ?>
 		<?php if ($this->session->flashdata('success')) { ?>
 			<div class="alert alert-success alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><?php echo "created Successfully"; ?>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><?php echo $this->session->flashdata('success');$this->session->set_flashdata('success', '') ?>
 			</div>
 		<?php } ?>
 		<div class="card">

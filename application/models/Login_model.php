@@ -22,11 +22,13 @@ class Login_model extends CI_Model
 			$this->db->from('user'); // table name
 			$this->db->where('user_id', $user); // where username is equal to $username
 			$query2 = $this->db->get(); //get data from DB
-
-			$pass=$query2->row_array()['password'];
-			if($password == $this->encrypt->decode($pass))
+			if($query2->num_rows() > 0)
 			{
-				return $query;
+				$pass=$query2->row_array()['password'];
+				if($password == $this->encrypt->decode($pass))
+				{
+					return $query2;
+				}
 			}
 		}
 		return $query;
@@ -50,11 +52,13 @@ class Login_model extends CI_Model
 			$this->db->from('technician'); // table name
 			$this->db->where('technician_id', $user); // where username is equal to $username
 			$query2 = $this->db->get(); //get data from DB
-
-			$pass=$query2->row_array()['password'];
-			if($password == $this->encrypt->decode($pass))
+			if($query2->num_rows() > 0)
 			{
-				return $query2;
+				$pass=$query2->row_array()['password'];
+				if($password == $this->encrypt->decode($pass))
+				{
+					return $query2;
+				}
 			}
 		}
 		return $query;

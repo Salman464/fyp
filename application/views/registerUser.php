@@ -53,6 +53,7 @@
 							<div class="form-group ">
 								<div class="col-xs-12">
 									<input type="number" pattern="\d*" onKeyPress="if(this.value.length==15) return false;" class="form-control" name="id" id="validationCustom01" placeholder="ID" required>
+									<p id="idLenErr" style="display: none; color: red;">Invalid GIFT Id length (must be <=9)!</p>
 									<div class="valid-feedback">
 										Looks good!
 									</div>
@@ -77,6 +78,7 @@
 							<div class="form-group ">
 								<div class="col-xs-12">
 									<input type="number" pattern="\d*" onKeyPress="if(this.value.length==4) return false;" class="form-control" name="ext" id="validationCustom03" placeholder="Extension Number" required>
+									
 									<div class="valid-feedback">
 										Looks good!
 									</div>
@@ -149,6 +151,7 @@
 		let pass = document.getElementById('pass').value;
 		let cpass = document.getElementById('cpass').value;
 
+		let idLenErr = document.getElementById('idLenErr');
 		let mailErr1 = document.getElementById('mailErr1');
 		let mailErr2 = document.getElementById('mailErr2');
 		let cpassErr = document.getElementById('cpassErr');
@@ -159,6 +162,11 @@
 		if (!email.endsWith("@gift.edu.pk")) {
 			isValid = false;
 			mailErr1.style.display = "block";
+		}idLenErr
+
+		if (id > 2147483647) {
+			isValid = false;
+			idLenErr.style.display = "block";
 		}
 
 		if (pass.length < 8) {

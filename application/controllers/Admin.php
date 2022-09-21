@@ -16,6 +16,7 @@ class Admin extends CI_Controller
 		$this->load->model('Email_model');
 		$this->load->model('Users');
 		$this->load->model('ComplainantModel');
+		$this->load->library('encrypt');
 	}
 
   
@@ -235,7 +236,7 @@ class Admin extends CI_Controller
 					"name" => $name,
 					"phone_number" => $phone_number,
 					"email" => $email,
-					"password" => $password
+					"password" => $this->encrypt->encode($password)
 				]);
 				if ($create == true) {
 					$this->session->set_flashdata('success', 'Successfully created');
@@ -449,7 +450,14 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		if ($this->session->userdata('user_type') === '1') {
 
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[user.email]');
-
+			$this->form_validation->set_rules('id', 'ID', 'trim|required|is_unique[user.user_id]|max_length[10]');
+			if($this->input->post('id', TRUE) > 2147483647)
+			{
+				
+				$this->session->set_flashdata('errors', 'Invalid GIFT id length..!');
+				redirect('Admin/manage_admin');
+			}
+			
 			if ($this->form_validation->run() == TRUE) {
 				$user_id = $this->input->post('id', TRUE);
 				$user_type = $this->input->post('adminType', TRUE);
@@ -466,7 +474,7 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 					"phone_number" => $phone_number,
 					"ext" => $ext,
 					"email" => $email,
-					"password" => $password
+					"password" => $this->encrypt->encode($password)
 				]);
 				if ($create == true) {
 					$this->session->set_flashdata('success', 'Successfully created');
@@ -476,10 +484,10 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 					redirect('Admin/manage_admin');
 				}
 			} else {
-				if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-					$this->session->set_flashdata('errors', 'Error occurred!!');
+				// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+					$this->session->set_flashdata('errors', 'Email or ID already exist..!');
 					redirect('Admin/manage_admin');
-				}
+				// }
 			}
 		} else {
 			echo "Access Denied!";
