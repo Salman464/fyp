@@ -144,4 +144,31 @@ class ComplainantModel extends CI_Model
 			return 0;
 		}
 	}
+	function closeComplaint($complaint_id, $remarks)
+	{
+		date_default_timezone_set("Asia/Karachi");//default timezone
+
+		$this->db->select('*');
+		$this->db->from('complaint');
+		$this->db->set('status', 3);
+		$this->db->set('completion_time',date("Y-m-d H:i:s"));
+		$this->db->where('complaint_id', $complaint_id);
+		$this->db->update();
+
+		
+
+		$this->db->insert('complaint_status', [
+			'complaint_id' => $complaint_id,
+			'status' => 3,
+			'remarks' => $remarks
+		]);
+	}
+	function removeTressurerRequest($complaint_id)
+	{
+		$this->db->select('*');
+		$this->db->from('treasurer_request');
+		$this->db->set('status', 2);
+		$this->db->where('complaint_id', $complaint_id);
+		$this->db->update();
+	}
 }

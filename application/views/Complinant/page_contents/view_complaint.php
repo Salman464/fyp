@@ -15,6 +15,45 @@
 				</div>
 			</div>
 		</div>
+			
+
+		<div id="close_complaint" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+				<div class="modal-dialog">
+
+					<form action="<?php echo site_url('Complinant/close_complaint'); ?>" method="post" class="form-horizontal form-material">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Select below</h4>
+								<button type="reset" value="reset" class="close" data-dismiss="modal" aria-hidden="true"><i class="fas fa-times-circle" style="margin-right: 5px;"></i></button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<input type="hidden" name="complaint_id" value="<?php echo $complaint_id; ?>">
+									<div class="col-md-12 m-b-20">
+										<div class="custom-control mb-3 custom-radio">
+											<input checked type="radio" id="customRadio1" value="Resolved" name="remarks" class="custom-control-input">
+											<label class="custom-control-label" for="customRadio1">Complaint Resolved</label>
+										</div>
+										<div class="custom-control custom-radio">
+											<input type="radio" id="customRadio2" value="Rejected" name="remarks" class="custom-control-input">
+											<label class="custom-control-label" for="customRadio2">Cancel Request</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" class="btn waves-effect waves-light btn-rounded btn-info">Save
+								</button>
+								<button type="reset" value="reset" class="btn waves-effect waves-light btn-rounded btn-secondary" data-dismiss="modal">
+									Cancel
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+
 		<div class="card">
 			<div class="card-body">
 				<div class="card-title" style="border-bottom: 1px solid black;">
@@ -36,6 +75,11 @@
 				   style="text-align: justify; padding: 0px 10px 0px; font-size:1rem; margin-bottom: 16px;">
 					<?php echo $description; ?>
 				</p>
+				<?php if($complaint_details['status']!=3) {?>
+					<div class="form-actions text-right">
+						<button style="margin-left: 5px;" type="button" class="btn btn-info" data-toggle="modal" data-target="#close_complaint">Close Complaint</button>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 

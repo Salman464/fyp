@@ -284,5 +284,24 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 			echo "Access Denied!";
 		}
 	}
-
+	public function close_complaint()
+	{
+		if ($this->session->userdata('user_type') === '3') 
+		{
+			$complaint_id = $this->input->post('complaint_id', TRUE);
+			$remarks = $this->input->post('remarks', TRUE);
+			$this->ComplainantModel->closeComplaint($complaint_id, $remarks);
+			
+			
+			if($remarks=='Rejected')
+			{
+				$this->ComplainantModel->removeTressurerRequest($complaint_id);
+			}
+			redirect('Complinant/view_complaint/'.$complaint_id);
+			print_r('done');
+			die();
+		} else {
+			echo "Access Denied!";
+		}
+	}
 }

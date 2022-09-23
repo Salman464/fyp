@@ -89,7 +89,7 @@
 				<li><a href="<?php echo site_url('StoreMan/assetsInv'); ?>" aria-expanded="false"><i class="fas fa-inventory"></i><span class="hide-menu">Inventory</span></a></li>
 				<div class="dropdown-divider"></div>
 				<?php if($this->session->userdata('user_type')==1){?>
-				<li><a href="<?php echo site_url('StoreMan/toAdmin'); ?>" aria-expanded="false"><i class="fas fa-undo"></i><span class="hide-menu">Back to Admin</span></a></li>
+				<li><a href="<?php echo site_url('StoreMan/toAdmin'); ?>" aria-expanded="false"><i class="fas fa-undo"></i><span class="hide-menu">Back to Main Menu</span></a></li>
 				<div class="dropdown-divider"></div>
 				<?php } ?>
 			</ul>
