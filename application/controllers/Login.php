@@ -9,6 +9,7 @@ class Login extends CI_Controller
 		$this->load->model('Login_model');
 		$this->load->model('email_model');
 		$this->load->library('encryption');
+		$this->load->library('encrypt');
 	}
 
 	public function index()
@@ -161,7 +162,7 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		$_SESSION['token'];
 		$data = $this->input->post();
 		if ($data['password'] == $data['cpassword']) {
-			$this->Login_model->update_passwordWithMail($data['password'], $_SESSION['token']);
+			$this->Login_model->update_passwordWithMail($this->encrypt->encode($data['password']), $_SESSION['token']);
 		}
 		$this->session->set_flashdata('success', 'Password Changed!');
 		redirect('Login');

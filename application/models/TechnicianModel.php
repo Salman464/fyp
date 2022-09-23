@@ -83,10 +83,23 @@ class TechnicianModel extends CI_Model
 	}
 	public function notFirstLogin($technician_id)
 	{
-		$this->db->select('*');
-		$this->db->from('technician');
 		$this->db->set('first_login', 1);
 		$this->db->where('technician_id', $technician_id);
-		$this->db->update();
+		$this->db->update('technician');
+
+	}
+	public function getOldPass($id)
+	{
+		$this->db->select('*');
+		$this->db->from('technician');
+		$this->db->where('technician_id',$id);
+		$rs = $this->db->get()->row_array();
+		return $rs['password'];
+	}
+	public function updateNewPass($id,$new_pass)
+	{
+		$this->db->set('password', $new_pass);
+		$this->db->where('technician_id', $id);
+		return $this->db->update('technician');
 	}
 }

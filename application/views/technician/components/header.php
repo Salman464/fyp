@@ -63,6 +63,8 @@
 						<div class="dropdown-menu dropdown-menu-right animated flipInY">
 							<a href="<?php echo site_url('technician/profile'); ?>" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
 							<div class="dropdown-divider"></div>
+							<a href="<?php echo site_url('technician/change_password'); ?>" class="dropdown-item"><i class="ti-lock"></i> Change Password</a>
+							<div class="dropdown-divider"></div>
 							<a href="<?php echo site_url('Login/logout'); ?>" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
 						</div>
 					</li>
