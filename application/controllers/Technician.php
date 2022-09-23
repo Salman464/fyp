@@ -16,6 +16,14 @@ class Technician extends CI_Controller
 	public function index()
 	{
 		if ($this->session->userdata('user_type') === '9') {
+
+			$technician_id = $this->session->userdata('user_id');
+
+			if($this->TechnicianModel->checkFirstLogin($technician_id))
+			{
+				$this->TechnicianModel->notFirstLogin($technician_id);
+				$this->change_password();
+			}
 			$headData['title'] = "Technician Dashboard";
 
 			$data['allComplaints'] = $this->TechnicianModel->getAllComplaintsCount($this->session->userdata('user_id'));
@@ -31,7 +39,16 @@ class Technician extends CI_Controller
 			echo "Access Denied!";
 		}
 	}
-
+	public function change_password()
+	{
+		echo "Hey";
+		die();
+		$headData['title'] = "Technician Dashboard";
+				
+		$this->load->view('technician/components/header', $headData);
+		$this->load->view('technician/page_contents/change_password');
+		$this->load->view('technician/components/footer');
+	}
 	public function tasks_performed()
 	{
 		if ($this->session->userdata('user_type') === '9') {

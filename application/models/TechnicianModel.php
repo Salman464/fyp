@@ -73,4 +73,20 @@ class TechnicianModel extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function checkFirstLogin($tid)
+	{
+		$this->db->select('*');
+		$this->db->from('technician');
+		$this->db->where('technician_id',$tid);
+		$rs = $this->db->get()->row_array();
+		return $rs['first_login'] == 0;
+	}
+	public function notFirstLogin($technician_id)
+	{
+		$this->db->select('*');
+		$this->db->from('technician');
+		$this->db->set('first_login', 1);
+		$this->db->where('technician_id', $technician_id);
+		$this->db->update();
+	}
 }
