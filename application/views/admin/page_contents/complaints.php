@@ -114,6 +114,7 @@
 						<hr>
 						<div class="row p-t-20">
 							<div class="col-md-6">
+								<h5>Select duration below</h5>
 								<div class="form-group">
 									<label class="control-label">From Date</label>
 									<input id="start_date" type="date" value="<?php echo $misc['start_date']; ?>" name="start_date" placeholder="Select Start Date" class="form-control" id="validationCustom02" required>
