@@ -1150,7 +1150,7 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		// 	'end_date'=> $i->format("Y-m-t h:i:s")];
 		// 	$monComplaints+=array($i->format("M Y")=>($this->AdminModel->getTechnicianPerformanceFor($technician_id,$duration)));
 		// }
-		echo $end;
+		echo "Hello to genrate report";
 		die();
 	}
 }

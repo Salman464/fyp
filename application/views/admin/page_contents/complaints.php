@@ -108,30 +108,54 @@
 
 		<div class="card"  id="genrateReport" style="display: none;">
 			<div class="card-body">
-				<form onsubmit="return validateDates()" action="<?php echo site_url('Admin/generateReport'); ?>" method="get">
+				<form onsubmit="return validateDates2()" action="<?php echo site_url('Admin/generateReport'); ?>" method="get">
 					<div class="form-body">
 						<h4 class="card-title">Genrate a detailed report</h4>
 						<hr>
+						<div class="row">
+							<h4>Select duration below</h4>
+							<div class="ml-2 row col-6">
+								<div class="form-check col-6">
+									<input onclick="toggleManual1()" class="form-check-input" type="radio" name="report_duration" value="7" id="flexRadioDefault1" checked>
+									<label class="form-check-label" for="flexRadioDefault1">
+										1 Week
+									</label>
+								</div>
+								<div class="form-check col-6">
+									<input onclick="toggleManual2()" class="form-check-input" type="radio" name="report_duration" value="30" id="flexRadioDefault2">
+									<label class="form-check-label" for="flexRadioDefault2">
+										1 Month
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row ml-2">
+							<div class="form-check col-6">
+								<input onclick="toggleManual()" class="form-check-input" type="radio" name="report_duration" value="30" id="flexRadioDefault3">
+								<label class="form-check-label" for="flexRadioDefault3">
+									Select manually
+								</label>
+							</div>
+						</div>
 						<div class="row p-t-20">
 							<div class="col-md-6">
-								<h5>Select duration below</h5>
 								<div class="form-group">
 									<label class="control-label">From Date</label>
-									<input id="start_date" type="date" value="<?php echo $misc['start_date']; ?>" name="start_date" placeholder="Select Start Date" class="form-control" id="validationCustom02" required>
-									<small class="form-text text-muted" id="msg" style="color: red;">Start date must be
+									<input id="from_date" type="date" value="<?php echo $misc['start_date']; ?>" name="from_date" placeholder="Select Start Date" class="form-control" id="validationCustom02" required>
+									<small class="form-text text-muted" id="reportmsg" style="color: red;">Start date must be
 										less than End date.</small>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">End Date</label>
-									<input id="end_date" type="date" value="<?php echo $misc['end_date']; ?>" name="end_date" placeholder="Select End Date" class="form-control" id="validationCustom02" required>
+									<input id="to_date" type="date" value="<?php echo $misc['end_date']; ?>" name="to_date" placeholder="Select End Date" class="form-control" id="validationCustom02" required>
 								</div>
 							</div>
 						</div>		
 					</div>
 					<div class="form-actions text-right">
-						<button type="submit" class="btn btn-info">View</button>
+						<button type="submit" class="btn btn-info">View Report</button>
 					</div>
 				</form>
 			</div>

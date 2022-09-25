@@ -210,6 +210,48 @@ function validateDates() {
     }
     return true;
 }
+function validateDates2() {
+
+    var date1 = document.getElementById('from_date');
+    var date2 = document.getElementById('to_date');
+    if (date1.value > date2.value) {
+        console.log(date1.value);
+        console.log(date2.value);
+        var err = document.getElementById('reportmsg');
+        err.classList.remove("text-muted");
+        return false;
+    }
+    return true;
+}
+function toggleManual()
+{
+    var radioManual = document.getElementById("flexRadioDefault3").checked;
+    
+    if(radioManual)
+    {
+        alert("ManualChecked");
+    }
+    
+}
+function toggleManual1()
+{
+    var radioWeek = document.getElementById("flexRadioDefault1").checked;
+
+    if(radioWeek)
+    {
+        alert("WeekChecked");
+    }
+    
+}
+function toggleManual2()
+{
+    var radioMonth = document.getElementById("flexRadioDefault2").checked;
+    if(radioMonth)
+    {
+        alert("MonthChecked");
+    }
+    
+}
 
 function editRemarks() {
 

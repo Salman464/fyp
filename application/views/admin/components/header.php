@@ -10,6 +10,7 @@
 	<meta name="author" content="">
 	<link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url(); ?>assets/admin/images/favicon.png">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/icons/font-awesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="<?php echo base_url('assets\admin\node_modules\bootstrap\dist\css\bootstrap.min.css'); ?>">
 	<title><?php echo $title; ?></title>
 	<link href="<?php echo base_url(); ?>assets/admin/node_modules/morrisjs/morris.css" rel="stylesheet">
 	<link href="<?php echo base_url(); ?>assets/admin/node_modules/toast-master/css/jquery.toast.css" rel="stylesheet">
