@@ -106,7 +106,7 @@
 		</div>
 
 
-		<div class="card" id="genrateReport" style="display: none;">
+		<div class="card"  id="genrateReport" style="display: none;">
 			<div class="card-body">
 				<form onsubmit="return validateDates()" action="<?php echo site_url('Admin/generateReport'); ?>" method="get">
 					<div class="form-body">
