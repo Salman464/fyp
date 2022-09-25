@@ -185,6 +185,8 @@ function toggleView() {
     }
 }
 
+
+
 function toggleView2(x) {
     x = document.getElementById(x);
     if (x.style.display === "none") {

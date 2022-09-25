@@ -20,6 +20,7 @@
 		<div class="row col-12">
 			<div class="col-md-6 col-sm-12">
 				<!-- <input type="checkbox" data-toggle="toggle"> -->
+				<button onclick="toggleReport()" class="btn btn-md btn-info"><i class="fas fa-report"></i> Genrate Report</button>
 			</div>
 			<div class="col-md-6 col-sm-12">
 				<h4 align="right">FROM :<b class="text-danger"><?php echo $misc['start_date']; ?> </b>TO :<b class="text-danger"><?php echo $misc['end_date']; ?></b>
@@ -97,7 +98,38 @@
 							</div>
 						</div>
 					</div>
-					<div align="right" class="form-actions">
+					<div class="form-actions text-right">
+						<button type="submit" class="btn btn-info">View</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+		<div class="card" id="genrateReport" style="display: none;">
+			<div class="card-body">
+				<form onsubmit="return validateDates()" action="<?php echo site_url('Admin/generateReport'); ?>" method="get">
+					<div class="form-body">
+						<h4 class="card-title">Genrate detailed report</h4>
+						<hr>
+						<div class="row p-t-20">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">From</label>
+									<input id="start_date" type="date" value="<?php echo $misc['start_date']; ?>" name="start_date" placeholder="Select Start Date" class="form-control" id="validationCustom02" required>
+									<small class="form-text text-muted" id="msg" style="color: red;">Start date must be
+										less than End date.</small>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">End Date</label>
+									<input id="end_date" type="date" value="<?php echo $misc['end_date']; ?>" name="end_date" placeholder="Select End Date" class="form-control" id="validationCustom02" required>
+								</div>
+							</div>
+						</div>		
+					</div>
+					<div class="form-actions text-right">
 						<button type="submit" class="btn btn-info">View</button>
 					</div>
 				</form>
@@ -644,4 +676,15 @@
 	};	
 
 	const specificDeptChart = new Chart(document.getElementById('specificDeptChart'),config1);
+</script>
+<script>
+function toggleReport()
+{
+    var x = document.getElementById("genrateReport");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 </script>

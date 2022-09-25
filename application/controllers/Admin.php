@@ -360,15 +360,14 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 			$remarks = $this->input->post('remarks', TRUE);
 			$this->AdminModel->closeComplaint($complaint_id, $remarks);
 			
-			
 			$to = $this->Users->getComplainantEmail($complaint_id)['email'];
 			$subject1 = "Complaint id: " . $complaint_id . " (Closed)";
 			$message = "
-<p><pre>*******************************************************
-THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
-*******************************************************</pre></p>
+			<p><pre>*******************************************************
+			THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+			*******************************************************</pre></p>
 
-<p>Complaint status has been updated against complaint Id.$complaint_id.</p>
+			<p>Complaint status has been updated against complaint Id.$complaint_id.</p>
 				<a href=" . site_url('Complinant/view_complaint/') . $complaint_id . ">View Complaint</a>";
 
 			$this->Email_model->send_smtp_mail($to, $subject1, $message);
@@ -1140,5 +1139,18 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		$status = $this->input->get('checkboxx', TRUE);
 		$this->AdminModel->updateAutomation($status);
 		redirect("Admin/index");
+	}
+	public function generateReport()
+	{
+		// $begin = new DateTime($start_date);
+		//$end = new DateTime(date('Y-m-1 h:i:s'));
+		// $monComplaints=array();
+		// for($i = $begin; $i <= new DateTime($end->format('Y-m-t')); $i->modify('+1 month -3 day')){
+		// 	$duration=['start_date'=>$i->format("Y-m-1 h:i:s"),
+		// 	'end_date'=> $i->format("Y-m-t h:i:s")];
+		// 	$monComplaints+=array($i->format("M Y")=>($this->AdminModel->getTechnicianPerformanceFor($technician_id,$duration)));
+		// }
+		echo $end;
+		die();
 	}
 }
