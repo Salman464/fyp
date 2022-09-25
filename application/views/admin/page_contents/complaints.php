@@ -110,12 +110,12 @@
 			<div class="card-body">
 				<form onsubmit="return validateDates()" action="<?php echo site_url('Admin/generateReport'); ?>" method="get">
 					<div class="form-body">
-						<h4 class="card-title">Genrate detailed report</h4>
+						<h4 class="card-title">Genrate a detailed report</h4>
 						<hr>
 						<div class="row p-t-20">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">From</label>
+									<label class="control-label">From Date</label>
 									<input id="start_date" type="date" value="<?php echo $misc['start_date']; ?>" name="start_date" placeholder="Select Start Date" class="form-control" id="validationCustom02" required>
 									<small class="form-text text-muted" id="msg" style="color: red;">Start date must be
 										less than End date.</small>
