@@ -223,35 +223,35 @@ function validateDates2() {
     }
     return true;
 }
-function toggleManual()
-{
-    var radioManual = document.getElementById("flexRadioDefault3").checked;
+// function toggleManual()
+// {
+//     var radioManual = document.getElementById("flexRadioDefault3").checked;
     
-    if(radioManual)
-    {
-        alert("ManualChecked");
-    }
+//     if(radioManual)
+//     {
+//         alert("ManualChecked");
+//     }
     
-}
-function toggleManual1()
-{
-    var radioWeek = document.getElementById("flexRadioDefault1").checked;
+// }
+// function toggleManual1()
+// {
+//     var radioWeek = document.getElementById("flexRadioDefault1").checked;
 
-    if(radioWeek)
-    {
-        alert("WeekChecked");
-    }
+//     if(radioWeek)
+//     {
+//         alert("WeekChecked");
+//     }
     
-}
-function toggleManual2()
-{
-    var radioMonth = document.getElementById("flexRadioDefault2").checked;
-    if(radioMonth)
-    {
-        alert("MonthChecked");
-    }
+// }
+// function toggleManual2()
+// {
+//     var radioMonth = document.getElementById("flexRadioDefault2").checked;
+//     if(radioMonth)
+//     {
+//         alert("MonthChecked");
+//     }
     
-}
+// }
 
 function editRemarks() {
 
