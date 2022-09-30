@@ -871,4 +871,11 @@ class AdminModel extends CI_Model
 		$this->db->where('technician_id',$tid);
 		return $this->db->get()->num_rows();
 	}
+	public function getComplaintsForTheDay($start,$end)
+	{
+		$this->db->select('*');
+		$this->db->from('complaint');
+		$this->db->where('complaint_date BETWEEN "' . $start . '" and "' . $end . '"');
+		return $this->db->get()->result_array();
+	}
 }

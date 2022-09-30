@@ -14,10 +14,10 @@ class Email_model extends CI_Model {
 		// SMTP & mail configuration
 		$config = array(
 			'protocol' => 'smtp',
-			'smtp_host' => 'mail.kag.one',
-			'smtp_port' => '587',
-			'smtp_user' => 'cms@kag.one',
-			'smtp_pass' => 'GIFTCMS123',
+			'smtp_host' => 'ssl://mail.appdemo.one',
+			'smtp_port' => '465',
+			'smtp_user' => 'cms@appdemo.one',
+			'smtp_pass' => 'xYM7gPwe6wKmMbPQjP',
 			'mailtype' => 'html',
 			'charset' => 'iso-8859-1',
 			'smtp_timeout' => '10'
@@ -36,9 +36,9 @@ class Email_model extends CI_Model {
 		$this->email->message($htmlContent);
 		$this->email->cc('181370103@gift.edu.pk');
 
-//		print_r($this->email);
-//		die();
-		//Send email
+		// print_r($this->email);
+		// die();
+		
 		return $this->email->send();
 	}
 }

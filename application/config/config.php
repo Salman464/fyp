@@ -490,6 +490,7 @@ $config['compress_output'] = FALSE;
 |
 */
 $config['time_reference'] = 'Asia/Karachi';
+date_default_timezone_set('Asia/Karachi');
 
 /*
 |--------------------------------------------------------------------------

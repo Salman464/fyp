@@ -1142,15 +1142,106 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 	}
 	public function generateReport()
 	{
+		$dur = $this->input->get('report_duration', TRUE);
+		
+		$end = new DateTime(date('Y-m-d'));
+		$duration = [];
+		$dailyComplaints=array();
+		if($dur==7)
+		{
+			//weekly
+			$start=$end->modify("-7 day");
+			
+			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				$comps=$this->AdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+			}
+		}
+		elseif($dur==15)
+		{
+			//quater
+			$start=$end->modify("-15 day");
+			
+			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				$comps=$this->AdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+			}
+		}
+		elseif($dur==30)
+		{
+			//monthly
+			$start=$end->modify("-30 day");
+			
+			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				$comps=$this->AdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+			}
+		}
+		elseif($dur==0)
+		{
+			//manual
+			$start_date = $this->input->get("from_date", TRUE);
+			$end_date = $this->input->get("to_date", TRUE);
+
+			$start=new DateTime($start_date);
+			$end = new DateTime($end_date);
+
+			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				$comps=$this->AdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+			}
+		}
+		else
+		{
+			echo "Invalid duration";
+		}
 		// $begin = new DateTime($start_date);
-		//$end = new DateTime(date('Y-m-1 h:i:s'));
+		// $end = new DateTime(date('Y-m-1 h:i:s'));
 		// $monComplaints=array();
 		// for($i = $begin; $i <= new DateTime($end->format('Y-m-t')); $i->modify('+1 month -3 day')){
 		// 	$duration=['start_date'=>$i->format("Y-m-1 h:i:s"),
 		// 	'end_date'=> $i->format("Y-m-t h:i:s")];
 		// 	$monComplaints+=array($i->format("M Y")=>($this->AdminModel->getTechnicianPerformanceFor($technician_id,$duration)));
 		// }
-		echo "Hello to genrate report";
+		//print_r($dailyComplaints);
+		foreach ($dailyComplaints as $key => $value)
+		 {
+			print_r($key);
+			echo "<br>";
+			echo count($value);
+			foreach ($value as $complaint) 
+			{
+				print_r($complaint);
+				echo "<hr>";
+			}
+			echo "<br>";
+		}
+		
+        //$this->Email_model->send_smtp_mail('181370157@gift.edu.pk' , 'Important Email' , 'Hello World!');
 		die();
 	}
 }
