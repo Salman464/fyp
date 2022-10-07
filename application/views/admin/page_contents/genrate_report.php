@@ -27,7 +27,7 @@
                                 {
                         ?>
                                     print_r($complaint);
-                                    echo "<hr>";
+                                    echo "<hr>";t
                         <?php   }
                                 echo "<br>";
                             }
