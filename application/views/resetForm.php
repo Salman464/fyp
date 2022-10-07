@@ -30,12 +30,12 @@
 	<div class="login-register">
 		<div class="login-box card">
 			<div class="card">
-				<?php if ($this->session->flashdata('message')) { ?>
+				<!-- <?php if ($this->session->flashdata('message')) { ?>
 					<div class="alert alert-danger alert-dismissible" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-						</button><?php echo $this->session->flashdata('message'); ?>
+						</button><?php //echo $this->session->flashdata('message'); ?>
 					</div>
-				<?php } ?>
+				<?php } ?> -->
 				<div class="card-body">
 					<form onsubmit="return validatePass()" class="form-horizontal" id="verifyForm" method="POST" action="<?php echo site_url('Login/changePassword'); ?>">
 						<div class="form-group ">

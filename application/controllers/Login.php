@@ -140,7 +140,7 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 			<a href=" . site_url('Login/verify?token=') . $token . ">Reset Password</a>
 			";
 			$this->email_model->send_smtp_mail($email, $subject, $message);
-			$this->session->set_flashdata('message', 'Email Sent, Follow Email to continue Process!');
+			$this->session->set_flashdata('success', 'Email Sent, Follow Email to continue Process!');
 			redirect('Login');
 		} else {
 			$this->session->set_flashdata('message', 'Invalid User!!');
@@ -162,9 +162,20 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		$_SESSION['token'];
 		$data = $this->input->post();
 		if ($data['password'] == $data['cpassword']) {
-			$this->Login_model->update_passwordWithMail($this->encrypt->encode($data['password']), $_SESSION['token']);
+			if($this->Login_model->update_passwordWithMail($this->encrypt->encode($data['password']), $_SESSION['token']))
+			{
+				$this->session->set_flashdata('success', 'Password Changed!');
+			}
+			else
+			{
+				$this->session->set_flashdata('error', 'Invalid Tokken! Click the latest reset password link...');
+			}	
 		}
-		$this->session->set_flashdata('success', 'Password Changed!');
+		else
+		{
+			$this->session->set_flashdata('error', 'Failed.! Password and confirm password are not same...');
+		}
+		
 		redirect('Login');
 		$this->load->view('login_view');
 	}

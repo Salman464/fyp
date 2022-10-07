@@ -90,6 +90,6 @@ class Login_model extends CI_Model
 		$this->db->from('user'); // table name
 		$this->db->set('password', $password);
 		$this->db->where('password', $token);
-		$this->db->update();
+		return $this->db->update();
 	}
 }

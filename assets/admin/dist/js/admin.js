@@ -185,18 +185,6 @@ function toggleView() {
     }
 }
 
-function toggleReport() {
-    var x = document.getElementById("genrateReport");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-        document.getElementById("flexRadioDefault1").checked=true;
-    } else {
-        x.style.display = "none";
-    }
-}
-
-
-
 function toggleView2(x) {
     x = document.getElementById(x);
     if (x.style.display === "none") {
@@ -219,64 +207,6 @@ function validateDates() {
         return false;
     }
     return true;
-}
-function validateDates2() {
-
-    var date1 = document.getElementById('from_date');
-    var date2 = document.getElementById('to_date');
-    if (date1.value > date2.value) {
-        console.log(date1.value);
-        console.log(date2.value);
-        var err = document.getElementById('reportmsg');
-        err.classList.remove("text-muted");
-        return false;
-    }
-    return true;
-}
-function toggleManual()
-{
-    var radioManual = document.getElementById("flexRadioDefault3").checked;
-    
-    if(radioManual)
-    {
-        //alert("ManualCheckedNow");
-        document.getElementById("from_date").disabled = false;
-        document.getElementById("to_date").disabled = false;
-    }
-    
-}
-function toggleManual1()
-{
-    var radioWeek = document.getElementById("flexRadioDefault1").checked;
-
-    if(radioWeek)
-    {
-        //alert("WeekChecked");
-        document.getElementById("from_date").disabled = true;
-        document.getElementById("to_date").disabled = true;
-    }
-    
-}
-function toggleManual2()
-{
-    var radioMonth = document.getElementById("flexRadioDefault2").checked;
-    if(radioMonth)
-    {
-        //alert("MonthChecked");
-        document.getElementById("from_date").disabled = true;
-        document.getElementById("to_date").disabled = true;
-    }
-    
-}
-function toggleManual3()
-{
-    var radioQuater = document.getElementById("flexRadioDefault15").checked;
-    if(radioQuater)
-    {
-        //alert("MonthChecked");
-        document.getElementById("from_date").disabled = true;
-        document.getElementById("to_date").disabled = true;
-    }
 }
 
 function editRemarks() {
