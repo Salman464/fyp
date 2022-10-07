@@ -15,7 +15,7 @@
                 <div class="card">
                     <h5 class="card-header text-right"><?php echo $duration['start_date']; ?> - <?php echo $duration['end_date']; ?></h5>
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
+                        <h5 class="card-title text-center">Hey</h5>
                         
                         <?php
                             foreach ($dailyComplaints as $key => $value)
