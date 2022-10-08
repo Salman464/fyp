@@ -1145,13 +1145,15 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		$dur = $this->input->get('report_duration', TRUE);
 		
 		$end = new DateTime(date('Y-m-d'));
-		$duration['end_date']=$end->format('d-m-Y');
+		$duration['end_date']=$end->format('d M Y');
 		$dailyComplaints=array();
+		$days=0;
 		if($dur==7)
 		{
 			//weekly
+			$days=7;
 			$start=$end->modify("-7 day");
-			$duration['start_date'] = $start->format('d-m-Y');
+			$duration['start_date'] = $start->format('d M Y');
 			
 			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
 			{
@@ -1167,8 +1169,9 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		elseif($dur==15)
 		{
 			//half month
+			$days=15;
 			$start=$end->modify("-15 day");
-			$duration['start_date'] = $start->format('d-m-Y');
+			$duration['start_date'] = $start->format('d M Y');
 			
 			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
 			{
@@ -1184,8 +1187,9 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		elseif($dur==30)
 		{
 			//monthly
+			$days=30;
 			$start=$end->modify("-30 day");
-			$duration['start_date'] = $start->format('d-m-Y');
+			$duration['start_date'] = $start->format('d M Y');
 			
 			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
 			{
@@ -1206,7 +1210,7 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 			
 			$start=new DateTime($start_date);
 			$end = new DateTime($end_date);
-			$duration = ['start_date'=>$start->format('d-m-Y'),'end_date'=>$end->format('d-m-Y')];
+			$duration = ['start_date'=>$start->format('d M Y'),'end_date'=>$end->format('d M Y')];
 
 			for($i = $start; $i <= new DateTime($end->format('Y-m-d')); $i->modify('+1 day'))
 			{
@@ -1218,19 +1222,40 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 				{
 					$dailyComplaints+=array($i->format("d M Y")=>$comps);
 				}
+				$days=$days+1;
 			}
+			$days=$days-1;
 		}
 		else
 		{
 			echo "Invalid duration";
 			die();
 		}
+		 
 		$headData['title'] = "Generate Report";
 		$data['dailyComplaints']=$dailyComplaints;
 		$data['duration']=$duration;
+		$data['days']=$days;
 
 		$this->load->view('admin/components/header', $headData);
 		$this->load->view('admin/page_contents/genrate_report', $data);
 		$this->load->view('admin/components/footer');
+
+		$message = "
+		<p><pre>*******************************************************
+		THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+		*******************************************************</pre></p>
+		<p>".print_r($days,'-days Complaints Report')."-days Complaints Report</p>
+		<p>"."<pre>".json_encode($dailyComplaints, JSON_PRETTY_PRINT)."<pre/>"."</p>
+		<p>Open CMS Website to view all Complaints</p>
+		<a href=" . site_url('Admin/complaints') . ">View Complaints</a>";
+
+		$data = $this->Users->getAdminsEmails();
+		$to = array();
+		for ($i = 0; $i < count($data); $i++) {
+			$to[$i] = $data[$i]['email'];
+		}
+		
+		$this->Email_model->send_smtp_mail('181370103@gift.edu.pk',"CMS ".$days." days Report", $message);
 	}
 }

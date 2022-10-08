@@ -873,9 +873,25 @@ class AdminModel extends CI_Model
 	}
 	public function getComplaintsForTheDay($start,$end)
 	{
-		$this->db->select('*');
+		// $this->db->select('*');
+		// $this->db->from('complaint');
+		// $this->db->where('complaint_date BETWEEN "' . $start . '" and "' . $end . '"');
+		// $this->db->where('department_id !=8');
+		// return $this->db->get()->result_array();
+		$this->db->select('complaint.complaint_id,complaint.subject,complaint.description,user.name as complainant,department.dept_name as department,technician.name as Technician,complaint.status');
 		$this->db->from('complaint');
-		$this->db->where('complaint_date BETWEEN "' . $start . '" and "' . $end . '"');
-		return $this->db->get()->result_array();
+		$this->db->join('user', 'user.user_id = complaint.user_id');
+		$this->db->join('department', 'department.id = complaint.department_id');
+		$this->db->join('technician', 'technician.technician_id = complaint.technician_id');
+		$this->db->order_by("complaint_id", "DESC");
+		$this->db->where('complaint.event_num', 0);
+		$this->db->where('complaint.complaint_date BETWEEN "'.$start.'" and "'.$end.'"');
+		$this->db->where('complaint.department_id !=8');
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function getComplainantsFrom($start,$end)
+	{
+		
 	}
 }
