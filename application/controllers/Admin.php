@@ -613,9 +613,22 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		if ($this->session->userdata('user_type') === '1') {
 			$complaint_id = $this->input->post('complaint_id', TRUE);
 			$technician_id = $this->input->post('technician_id', TRUE);
-
+			$technician_email = $this->input->post('technician_email', TRUE);
+			
 			$this->AdminModel->assignTechnician($complaint_id, $technician_id);
 			//Added
+			$subject1 = "New Complaint Assigned";
+			$message = "
+<p><pre>
+*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************</pre></p>
+
+<p>New complaint assigned to you. id: (.$complaint_id.)</p>
+<p>Open CMS Website to respond or click</p>
+				<a href=" . site_url('Technician/index') . ">View Complaint</a>";
+
+			$this->Email_model->send_smtp_mail($technician_email, $subject1, $message);
 			redirect('Admin/view_complaint/' . $complaint_id);
 		} else {
 			echo "Access Denied!";
@@ -627,7 +640,22 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		if ($this->session->userdata('user_type') === '1') {
 			$complaint_id = $this->input->post('complaint_id', TRUE);
 			$technician_id = $this->input->post('technician_id', TRUE);
+			$technician_email = $this->input->post('technician_email', TRUE);
+			
+			
+			$subject = "New Complaint Assigned";
+			$message = "
+<p><pre>
+*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************</pre></p>
 
+<p>New complaint assigned to you. id: (.$complaint_id.)</p>
+<p>Open CMS Website to respond or click</p>
+				<a href=" . site_url('Technician/index') . ">View Complaint</a>";
+				
+			$sent = $this->Email_model->send_smtp_mail($technician_email, $subject, $message);
+			
 			$this->AdminModel->reAssignTechnician($complaint_id, $technician_id);
 		} else {
 			echo "Access Denied!";
@@ -1242,12 +1270,33 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		$this->load->view('admin/components/footer');
 
 		$message = "
-		<p><pre>*******************************************************
-		THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
-		*******************************************************</pre></p>
-		<p>".print_r($days,'-days Complaints Report')."-days Complaints Report</p>
-		<p>"."<pre>".json_encode($dailyComplaints, JSON_PRETTY_PRINT)."<pre/>"."</p>
-		<p>Open CMS Website to view all Complaints</p>
+		<p><pre>
+*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************
+		</pre></p>
+		<h3>".print_r($days,'-days Complaints Report')."-days Complaints Report</h3>";
+
+		foreach ($dailyComplaints as $key => $val) {
+			$message.="<h3>".print_r($key,'n')."</h3>";
+			foreach ($val as $comp) {
+				$message.="<p>Complaint Id :".print_r($comp->complaint_id,'n')." | Complainant :".print_r($comp->complainant,'n')." | Department :".print_r($comp->department,'n')." | Technician :".print_r($comp->Technician,'n')." | Status :";
+				if ($comp->status == 0) {
+					$message.="Pending";
+				} else if ($comp->status == 1) {
+					$message.="In-Process";
+				} else if ($comp->status == 2) {
+					$message.="Product Requested";
+				} else {
+					$message.="Closed";
+				}
+				$message.=" | <a href=" . site_url('Admin/view_complaint/'.$comp->complaint_id) . ">View Complaint</a>";
+				$message.="</p><br>";
+				
+			}
+		}
+		
+		$message.="<p>Open CMS Website to view all Complaints</p>
 		<a href=" . site_url('Admin/complaints') . ">View Complaints</a>";
 
 		$data = $this->Users->getAdminsEmails();
@@ -1256,6 +1305,8 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 			$to[$i] = $data[$i]['email'];
 		}
 		
-		$this->Email_model->send_smtp_mail('181370103@gift.edu.pk',"CMS ".$days." days Report", $message);
+		echo $message;
+		die();
+		//$this->Email_model->send_smtp_mail('181370103@gift.edu.pk',"CMS ".$days." days Report", $message);
 	}
 }

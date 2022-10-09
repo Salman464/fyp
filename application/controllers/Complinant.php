@@ -115,7 +115,7 @@ class Complinant extends CI_Controller
 			]);
 			
 
-			date_default_timezone_set('Asia/Karachi');
+			//date_default_timezone_set('Asia/Karachi');
 			$date=date("Y-m-d h:i:s",strtotime('+1 day'));
 			// echo $department_id.'==='.$subject.'==='.$description.'==='.$date;
 			// die();
@@ -158,11 +158,12 @@ class Complinant extends CI_Controller
 					}		
 				}
 			}
-			
+
 			$subject1 = $comp_id . ": " . $subject;
 			if ($department_id == 8) {
 				$message = "
-<p><pre>*******************************************************
+<p><pre>
+*******************************************************
 THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 *******************************************************</pre></p>
 

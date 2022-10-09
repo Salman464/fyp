@@ -12,9 +12,10 @@ class TechnicianModel extends CI_Model
 
 	function getAllComplaintsCountWithStatus($technician_id, $status)
 	{
-		$this->db->select('complaint.*, complaint_status.remarks');
+		$this->db->select('complaint.status');
 		$this->db->from('complaint');
-		$this->db->join('complaint_status', 'complaint.complaint_id = complaint_status.complaint_id');
+		$this->db->where('event_num', 0);
+		$this->db->where('status < 3');
 		$this->db->where('technician_id', $technician_id);
 
 		if ($status === 3) {

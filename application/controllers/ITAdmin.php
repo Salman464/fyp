@@ -290,8 +290,23 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		if ($this->session->userdata('user_type') === '2') {
 			$complaint_id = $this->input->post('complaint_id', TRUE);
 			$technician_id = $this->input->post('technician_id', TRUE);
+			$technician_email = $this->input->post('technician_email', TRUE);
+			
+			$this->AdminModel->assignTechnician($complaint_id, $technician_id);
+			//Added
+			$subject1 = "New Complaint Assigned";
+			$message = "
+<p><pre>
+*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************</pre></p>
 
-			$this->ITAdminModel->assignTechnician($complaint_id, $technician_id);
+<p>New complaint assigned to you. id: (.$complaint_id.)</p>
+<p>Open CMS Website to respond or click</p>
+				<a href=" . site_url('Technician/index') . ">View Complaint</a>";
+
+			$this->Email_model->send_smtp_mail($technician_email, $subject1, $message);
+			redirect('ITAdmin/view_complaint/' . $complaint_id);
 		} else {
 			echo "Access Denied!";
 		}
@@ -471,5 +486,146 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		$status = $this->input->get('checkboxx', TRUE);
 		$this->ITAdminModel->updateAutomation($status);
 		redirect("ITAdmin/index");
+	}
+	public function generateReport()
+	{
+		$dur = $this->input->get('report_duration', TRUE);
+		
+		$end = new DateTime(date('Y-m-d'));
+		$duration['end_date']=$end->format('d M Y');
+		$dailyComplaints=array();
+		$days=0;
+		if($dur==7)
+		{
+			//weekly
+			$days=7;
+			$start=$end->modify("-7 day");
+			$duration['start_date'] = $start->format('d M Y');
+			
+			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				$comps=$this->ITAdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+			}
+		}
+		elseif($dur==15)
+		{
+			//half month
+			$days=15;
+			$start=$end->modify("-15 day");
+			$duration['start_date'] = $start->format('d M Y');
+			
+			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				$comps=$this->ITAdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+			}
+		}
+		elseif($dur==30)
+		{
+			//monthly
+			$days=30;
+			$start=$end->modify("-30 day");
+			$duration['start_date'] = $start->format('d M Y');
+			
+			for($i = $start; $i <= new DateTime(date('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				$comps=$this->ITAdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+			}
+		}
+		elseif($dur==0)
+		{
+			//manual
+			$start_date = $this->input->get("from_date", TRUE);
+			$end_date = $this->input->get("to_date", TRUE);
+			
+			$start=new DateTime($start_date);
+			$end = new DateTime($end_date);
+			$duration = ['start_date'=>$start->format('d M Y'),'end_date'=>$end->format('d M Y')];
+
+			for($i = $start; $i <= new DateTime($end->format('Y-m-d')); $i->modify('+1 day'))
+			{
+				$s=$i->format('Y-m-d 00:00:00');
+				$e=$i->format('Y-m-d 23:59:59');
+				
+				$comps=$this->ITAdminModel->getComplaintsForTheDay($s,$e);
+				if(count($comps) > 0)
+				{
+					$dailyComplaints+=array($i->format("d M Y")=>$comps);
+				}
+				$days=$days+1;
+			}
+			$days=$days-1;
+		}
+		else
+		{
+			echo "Invalid duration";
+			die();
+		}
+		 
+		$headData['title'] = "Generate Report";
+		$data['dailyComplaints']=$dailyComplaints;
+		$data['duration']=$duration;
+		$data['days']=$days;
+
+		$this->load->view('admin/components/header', $headData);
+		$this->load->view('admin/page_contents/genrate_report', $data);
+		$this->load->view('admin/components/footer');
+
+		$message = "
+		<p><pre>
+*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************
+		</pre></p>
+		<h3>".print_r($days,'-days Complaints Report')."-days Complaints Report</h3>";
+
+		foreach ($dailyComplaints as $key => $val) {
+			$message.="<h3>".print_r($key,'n')."</h3>";
+			foreach ($val as $comp) {
+				$message.="<p>Complaint Id :".print_r($comp->complaint_id,'n')." | Complainant :".print_r($comp->complainant,'n')." | Department :".print_r($comp->department,'n')." | Technician :".print_r($comp->Technician,'n')." | Status :";
+				if ($comp->status == 0) {
+					$message.="Pending";
+				} else if ($comp->status == 1) {
+					$message.="In-Process";
+				} else if ($comp->status == 2) {
+					$message.="Product Requested";
+				} else {
+					$message.="Closed";
+				}
+				$message.=" | <a href=" . site_url('Admin/view_complaint/'.$comp->complaint_id) . ">View Complaint</a>";
+				$message.="</p><br>";
+				
+			}
+		}
+		
+		$message.="<p>Open CMS Website to view all Complaints</p>
+		<a href=" . site_url('Admin/complaints') . ">View Complaints</a>";
+
+		$data = $this->Users->getAdminsEmails();
+		$to = array();
+		for ($i = 0; $i < count($data); $i++) {
+			$to[$i] = $data[$i]['email'];
+		}
+		
+		echo $message;
+		die();
+		//$this->Email_model->send_smtp_mail('181370103@gift.edu.pk',"CMS ".$days." days Report", $message);
 	}
 }

@@ -98,6 +98,7 @@ class StoreMan extends CI_Controller
 			$old_status = $this->input->post('old_stat');
 			$complaint_id = $this->input->post('complaint_id');
 			if($status==2){
+				
 			 	$this->RequestedComplaintmodel->sendToTreasurer(['complaint_id'=>$complaint_id,'asset_id'=>$asset_id]);
 			}
 			else{
@@ -126,33 +127,44 @@ class StoreMan extends CI_Controller
 				for ($i = 0; $i < count($data); $i++) {
 					$to[$i] = $data[$i]['email'];
 				}
-				$message = "
-<p><pre>*******************************************************
-THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
-*******************************************************</pre></p>
-
-<p>Asset status has been updated against asset Id.$asset_id.</p>
-				<a href=" . site_url('ITAdmin/view_complaint/') . $complaint_id . ">View Complaint</a>";
-			} else {
-				$data = $this->Users->getAdminsEmails();
-				$to = array();
+				$data = $this->Users->getTreasurerMail();
 				for ($i = 0; $i < count($data); $i++) {
-					$to[$i] = $data[$i]['email'];
+					array_push($to,$data[$i]['email']);
 				}
 				$message = "
 <p><pre>*******************************************************
 THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 *******************************************************</pre></p>
 
-<p>Asset status has been updated against asset Id.$asset_id.</p>
+<p>Funds requested to tresurer against asset Id.$asset_id.</p>
 				<a href=" . site_url('Admin/view_complaint/') . $complaint_id . ">View Complaint</a>";
-			}
-
-			$subject1 = "Asset id: " . $asset_id . " status updated";
-			$this->Email_model->send_smtp_mail($to, $subject1, $message);
-			$this->RequestedComplaintmodel->updateAssetStatus($asset_id, $status);
 			
 
+			$subject1 = "Funds requested from Treasure :".$asset_id;
+			$this->Email_model->send_smtp_mail($to, $subject1, $message);
+			} else {
+				$data = $this->Users->getAdminsEmails();
+				$to = array();
+				for ($i = 0; $i < count($data); $i++) {
+					$to[$i] = $data[$i]['email'];
+				}
+				$data = $this->Users->getTreasurerMail();
+				for ($i = 0; $i < count($data); $i++) {
+					array_push($to,$data[$i]['email']);
+				}
+				$message = "
+<p><pre>*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************</pre></p>
+
+<p>Funds requested to tresurer against asset Id.$asset_id.</p>
+				<a href=" . site_url('Admin/view_complaint/') . $complaint_id . ">View Complaint</a>";
+			
+			$subject1 = "Funds requested from Treasure :".$asset_id;
+			$this->Email_model->send_smtp_mail($to, $subject1, $message);
+			}
+			$this->RequestedComplaintmodel->updateAssetStatus($asset_id, $status);
+			
 		} else {
 			echo "Access Denied!";
 		}

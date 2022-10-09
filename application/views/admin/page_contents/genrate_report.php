@@ -19,8 +19,6 @@
                         <?php
                             foreach ($dailyComplaints as $key => $value)
                             {
-                                // echo "<br>";
-                                //echo count($value);
                         ?>
                         <hr>
                         <h5 class="card-title text-center"><?php echo $key; ?></h5>

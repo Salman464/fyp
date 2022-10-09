@@ -207,6 +207,7 @@ date_default_timezone_set("Asia/Karachi"); ?>
 														<form action="<?php echo site_url('ITAdmin/assignTechnician'); ?>" method="POST">
 															<input type="hidden" name="complaint_id" value="<?php echo $complaint_id; ?>">
 															<input type="hidden" name="technician_id" value="<?php echo $tech->technician_id; ?>">
+															<input type="hidden" name="technician_email" value="<?php echo $tech->email; ?>">
 															<button class="btn btn-info d-none d-lg-block m-l-15" type="submit">
 																Assign
 																Task
