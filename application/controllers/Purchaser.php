@@ -81,7 +81,7 @@ class Purchaser extends CI_Controller
 	{
 		if ($this->session->userdata('user_type') === '6') {
 			$headData['title'] = "Purchaser Dashboard";
-			$asset_id = $this->input->post('req');
+			$asset_id = $this->input->post('asset_id');
 			$data = $this->Users->getStoreManMail();
 			$to = array();
 			for ($i = 0; $i < count($data); $i++) {
@@ -92,8 +92,8 @@ class Purchaser extends CI_Controller
 THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 *******************************************************</pre></p>
 
-<p>Product against Id $asset_id has been purchased and issued to store</p>
-				<a href=" . site_url('StoreMan/view_request_product/') . $this->input->post('req') . ">View Product Details</a>";
+<p>Product against Asset_Id :$asset_id has been purchased and issued to Store</p>
+				<a href=" . site_url('StoreMan/view_request_product/') . $this->input->post('asset_id') . ">View Product Details</a>";
 
 			$subject1 = "Asset id: " . $asset_id . " status updated";
 			$this->Email_model->send_smtp_mail($to, $subject1, $message);

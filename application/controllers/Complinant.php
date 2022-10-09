@@ -24,7 +24,7 @@ class Complinant extends CI_Controller
 			$headData['title'] = "Complainant Dashboard";
 
 			$data['allComplaints'] = $this->ComplainantModel->getAllComplaintsCount($this->session->userdata('user_id'));
-			$data['openComplaints'] = $this->ComplainantModel->getAllOpenComplaintsCount($this->session->userdata('user_id'), 0);
+			$data['openComplaints'] = $this->ComplainantModel->getAllOpenComplaintsCount($this->session->userdata('user_id'));
 			$data['resolvedComplaints'] = $this->ComplainantModel->getAllResolvedComplaintsCount($this->session->userdata('user_id'), "Resolved");
 			$data['rejectedComplaints'] = $this->ComplainantModel->getAllResolvedComplaintsCount($this->session->userdata('user_id'), "Rejected");
 

@@ -73,10 +73,8 @@ class Treasurer extends CI_Controller
 	{
 		if ($this->session->userdata('user_type') === '5') {
 			$complaint_id = $this->input->get('complaint', TRUE);
-			$this->treasurer_model->approve($complaint_id);
 			$asset_id=$this->input->get('asset');
 			
-		
 
 			if ($this->Users->getDeptOfComplaintWithID($complaint_id)['department_id'] == 8) {
 				$data = $this->Users->getITAdminsEmails();
@@ -124,6 +122,7 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 <p>Request for Item(s) Purchase against complaint ID: .$complaint_id. has been approved</p>
 				<a href=" . site_url('Purchaser/requested_products') . ">View Requests</a>";
 			$this->Email_model->send_smtp_mail($purchasersMail, $subject2, $message2);
+			$this->treasurer_model->approve($complaint_id);
 
 			redirect('Treasurer/detail/' . $complaint_id);
 		} else {
@@ -136,44 +135,44 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		if ($this->session->userdata('user_type') === '5') {
 			$details = $this->input->post('report', TRUE);
 			$complaint_id = $this->input->post('complaint', TRUE);
+
+			if ($this->Users->getDeptOfComplaintWithID($complaint_id)['department_id'] == 8) {
+				$data = $this->Users->getITAdminsEmails();
+				$to = array();
+				for ($i = 0; $i < count($data); $i++) {
+					$to[$i] = $data[$i]['email'];
+				}
+				$message = "
+<p><pre>
+*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************</pre></p>
+
+<p>Request for Item(s) Purchase against complaint ID: .$complaint_id. has been Rejected</p>
+<dl>
+<dt><b>Rejection Reason:</b></dt>
+<dd>.$details.</dd>
+</dl>";
+			} else {
+				$data = $this->Users->getAdminsEmails();
+				$to = array();
+				for ($i = 0; $i < count($data); $i++) {
+					$to[$i] = $data[$i]['email'];
+				}
+				$message = "
+<p><pre>*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************</pre></p>
+
+<p>Request for Item(s) Purchase against complaint ID: .$complaint_id. has been Rejected</p>
+<dl>
+  <dt><b>Rejection Reason:</b></dt>
+  <dd>.$details.</dd>
+</dl>";
+			}
+			$subject1 = "Approval for item purchase";
+			$this->Email_model->send_smtp_mail($to, $subject1, $message);
 			$this->treasurer_model->reject($complaint_id, $details);
-
-// 			if ($this->Users->getDeptOfComplaintWithID($complaint_id)['department_id'] == 8) {
-// 				$data = $this->Users->getITAdminsEmails();
-// 				$to = array();
-// 				for ($i = 0; $i < count($data); $i++) {
-// 					$to[$i] = $data[$i]['email'];
-// 				}
-// 				$message = "
-// 	<p><pre>*******************************************************
-// 	THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
-// 	*******************************************************</pre></p>
-
-// 	<p>Request for Item(s) Purchase against complaint ID: .$complaint_id. has been rejected</p>
-// 	<dl>
-// 	<dt><b>Rejection Reason:</b></dt>
-// 	<dd>.$details.</dd>
-// 	</dl>";
-// 			} else {
-// 				$data = $this->Users->getAdminsEmails();
-// 				$to = array();
-// 				for ($i = 0; $i < count($data); $i++) {
-// 					$to[$i] = $data[$i]['email'];
-// 				}
-// 				$message = "
-// <p><pre>*******************************************************
-// THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
-// *******************************************************</pre></p>
-
-// <p>Request for Item(s) Purchase against complaint ID: .$complaint_id. has been rejected</p>
-// <dl>
-//   <dt><b>Rejection Reason:</b></dt>
-//   <dd>.$details.</dd>
-// </dl>";
-// 			}
-			//$subject1 = "Approval for item purchase";
-			//$this->Email_model->send_smtp_mail($to, $subject1, $message);
-
 			redirect('Treasurer/detail/' . $complaint_id);
 		} else {
 			echo "Access Denied!";

@@ -358,19 +358,20 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		if ($this->session->userdata('user_type') === '1') {
 			$complaint_id = $this->input->post('complaint_id', TRUE);
 			$remarks = $this->input->post('remarks', TRUE);
-			$this->AdminModel->closeComplaint($complaint_id, $remarks);
 			
 			$to = $this->Users->getComplainantEmail($complaint_id)['email'];
 			$subject1 = "Complaint id: " . $complaint_id . " (Closed)";
 			$message = "
-			<p><pre>*******************************************************
-			THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
-			*******************************************************</pre></p>
+<p><pre>
+*******************************************************
+THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
+*******************************************************</pre></p>
 
 			<p>Complaint status has been updated against complaint Id.$complaint_id.</p>
 				<a href=" . site_url('Complinant/view_complaint/') . $complaint_id . ">View Complaint</a>";
 
 			$this->Email_model->send_smtp_mail($to, $subject1, $message);
+			$this->AdminModel->closeComplaint($complaint_id, $remarks);
 			$q = $this->AdminModel->isEvent($complaint_id);
 			if ($q['event_num'] > 0)
 				redirect('Admin/view_event_complaint/' . $complaint_id);

@@ -59,11 +59,11 @@ class ComplainantModel extends CI_Model
 		return $query->num_rows();
 	}
 
-	function getAllOpenComplaintsCount($user_id, $status)
+	function getAllOpenComplaintsCount($user_id)
 	{
 		$this->db->select('*');
 		$this->db->from('complaint');
-		$this->db->where("status", $status);
+		$this->db->where("status>0");
 		$this->db->where('user_id', $user_id);
 		$query = $this->db->get();
 		return $query->num_rows();
