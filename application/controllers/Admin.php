@@ -1306,8 +1306,8 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 			$to[$i] = $data[$i]['email'];
 		}
 		
-		echo $message;
-		die();
+		 echo $message;
+		 die();
 		//$this->Email_model->send_smtp_mail('181370103@gift.edu.pk',"CMS ".$days." days Report", $message);
 	}
 }

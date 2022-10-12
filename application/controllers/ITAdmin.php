@@ -588,13 +588,14 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 		$this->load->view('admin/page_contents/genrate_report', $data);
 		$this->load->view('admin/components/footer');
 
+		
 		$message = "
 		<p><pre>
 *******************************************************
 THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 *******************************************************
 		</pre></p>
-		<h3>".print_r($days,'-days Complaints Report')."-days Complaints Report</h3>";
+		<h3>".print_r($days,'-days Complaints Report')."-days Complaints Report for IT department</h3>";
 
 		foreach ($dailyComplaints as $key => $val) {
 			$message.="<h3>".print_r($key,'n')."</h3>";
@@ -614,18 +615,22 @@ THIS IS A SYSTEM GENERATED EMAIL - PLEASE DO NOT REPLY
 				
 			}
 		}
+		if(count($dailyComplaints)==0)
+		{
+			$message.="<p><b>No complaints found for this duration</b></p>";
+		}
 		
 		$message.="<p>Open CMS Website to view all Complaints</p>
-		<a href=" . site_url('Admin/complaints') . ">View Complaints</a>";
+		<a href=" . site_url('ITAdmin/complaints') . ">View Complaints</a>";
 
-		$data = $this->Users->getAdminsEmails();
+		$data = $this->Users->getITAdminsEmails();
 		$to = array();
 		for ($i = 0; $i < count($data); $i++) {
 			$to[$i] = $data[$i]['email'];
 		}
 		
-		echo $message;
-		die();
-		//$this->Email_model->send_smtp_mail('181370103@gift.edu.pk',"CMS ".$days." days Report", $message);
+		// echo $message;
+		// die();
+		$this->Email_model->send_smtp_mail('181370103@gift.edu.pk',"CMS ".$days." days Report IT department", $message);
 	}
 }

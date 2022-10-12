@@ -37,8 +37,16 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12 m-2" align="right">
-			<button onclick="toggleView()" class="btn btn-md btn-info"><i class="fas fa-filter"></i> Filter</button>
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<!-- <input type="checkbox" data-toggle="toggle"> -->
+				<button onclick="toggleReport()" class="btn btn-md btn-info"><i class="fas fa-report"></i> Genrate Report</button>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<h4 align="right">FROM :<b class="text-danger"><?php echo $misc['start_date']; ?> </b>TO :<b class="text-danger"><?php echo $misc['end_date']; ?></b>
+					<button onclick="toggleView()" class="btn btn-md btn-info"><i class="fas fa-filter"></i> Filter</button>
+				</h4>
+			</div>
 		</div>
 		<div class="card" id="complaintFilter" style="display: none;">
 			<div class="card-body">
@@ -64,6 +72,68 @@
 					</div>
 					<div align="right" class="form-actions">
 						<button type="submit" class="btn btn-info">View</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="card"  id="genrateReport" style="display: none;">
+			<div class="card-body">
+				<form onsubmit="return validateDates2()" action="<?php echo site_url('ITAdmin/generateReport'); ?>" method="get">
+					<div class="form-body">
+						<h4 class="card-title">Genrate a detailed report</h4>
+						<hr>
+						<h4>Select duration below</h4>
+						<div class="row">
+							<hr>
+							<div class="ml-2 row col-12">
+								<div class="form-check col-md-2 col-sm-6">
+									<input class="form-check-input" type="radio" name="report_duration" value="7" id="flexRadioDefault1" checked>
+									<label class="form-check-label" for="flexRadioDefault1">
+										1 Week
+									</label>
+								</div>
+								<div class="form-check col-md-2 col-sm-6">
+									<input class="form-check-input" type="radio" name="report_duration" value="15" id="flexRadioDefault15">
+									<label class="form-check-label" for="flexRadioDefault15">
+										15 days
+									</label>
+								</div>
+								<div class="form-check col-md-2 col-sm-6">
+									<input class="form-check-input" type="radio" name="report_duration" value="30" id="flexRadioDefault2">
+									<label class="form-check-label" for="flexRadioDefault2">
+										1 Month
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row ml-2">
+							<div class="form-check col-6">
+								<input class="form-check-input" type="radio" name="report_duration" value="0" id="flexRadioDefault3">
+								<label class="form-check-label" for="flexRadioDefault3">
+									Select manually
+								</label>
+							</div>
+						</div>
+						<div class="row p-t-20">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">From Date</label>
+									<input id="from_date" type="date" value="<?php echo $misc['start_date']; ?>" name="from_date" placeholder="Select Start Date" class="form-control" id="validationCustom02" required>
+									<small class="form-text text-muted" id="reportmsg" style="color: red;">Start date must be
+										less than End date.</small>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">End Date</label>
+									<input id="to_date" type="date" value="<?php echo $misc['end_date']; ?>" name="to_date" placeholder="Select End Date" class="form-control" id="validationCustom02" required>
+								</div>
+							</div>
+						</div>		
+					</div>
+					<div class="form-actions text-right">
+						<button type="submit" class="btn btn-info">View Report</button>
 					</div>
 				</form>
 			</div>
@@ -438,3 +508,14 @@
 		</div>
 	</div>
 </div>
+<script>
+function toggleReport()
+{
+    var x = document.getElementById("genrateReport");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
