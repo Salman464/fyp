@@ -886,7 +886,7 @@ class AdminModel extends CI_Model
 		$this->db->order_by("complaint_id", "DESC");
 		$this->db->where('complaint.event_num', 0);
 		$this->db->where('complaint.complaint_date BETWEEN "'.$start.'" and "'.$end.'"');
-		$this->db->where('complaint.department_id !=8');
+		//$this->db->where('complaint.department_id !=8');
 		$query = $this->db->get();
 		return $query->result();
 	}
