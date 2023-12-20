@@ -1,29 +1,34 @@
 ###################
-What is CodeIgniter
+GIFT CMS
 ###################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+    `GIFT CMS`, a robust Complaint Management System tailored for the needs of a university environment. With a comprehensive suite of features, `GIFT CMS` streamlined and enhanced the complaint resolution process.
+*************
+Key Features:
+*************
 
-*******************
-Release Information
-*******************
+End-to-End Complaint Tracking:
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+  GIFT CMS offers a seamless complaint tracking mechanism, initiating from the complainant portal. For instance, if a faculty member reports an electricity issue in their office, the complaint is meticulously tracked through various stages: inspection portal, storeroom for parts, technician assignment, and finally to the accounts office for funds approval.
 
-**************************
-Changelog and New Features
-**************************
+Inventory Management:
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+     The system incorporates a thorough Inventory Management module for the university store. It ensures efficient tracking of spare parts, facilitating prompt issue resolution and minimizing downtime.
+
+Machine Learning Integration:
+
+     GIFT CMS leverages Machine Learning algorithms to intelligently categorize complaints based on content. This feature ensures swift and accurate routing of complaints to the relevant department, optimizing the resolution process.
+
+IT Admin Portal:
+
+     In addition to the general complaint management functionality, the system includes a dedicated IT admin portal. This portal caters specifically to 'IT' related complaints, streamlining the reporting and resolution of technology-related issues.
+
+Collaborative Success:
+
+     While leading this project, I collaborated closely with cross-functional teams, including stakeholders from inspection, storeroom, technical, and accounts departments. The project stands as a testament to my skills in project management, system design, and innovative problem-solving. I am proud to have contributed as a team leader and developer to the creation of a solution that not only addresses immediate challenges but also lays the foundation for a more streamlined and responsive university infrastructure.I spearheaded the development and implementation of `GIFT CMS`, a robust Complaint Management System tailored for the needs of a university environment. With a comprehensive suite of features, `GIFT CMS` streamlined and enhanced the complaint resolution process. Key Features: End-to-End Complaint Tracking: GIFT CMS offers a seamless complaint tracking mechanism, initiating from the complainant portal. For instance, if a faculty member reports an electricity issue in their office, the complaint is meticulously tracked through various stages: inspection portal, storeroom for parts, technician assignment, and finally to the accounts office for funds approval. Inventory Management: The system incorporates a thorough Inventory Management module for the university store. It ensures efficient tracking of spare parts, facilitating prompt issue resolution and minimizing downtime. Machine Learning Integration: GIFT CMS leverages Machine Learning algorithms to intelligently categorize complaints based on content. This feature ensures swift and accurate routing of complaints to the relevant department, optimizing the resolution process. IT Admin Portal: In addition to the general complaint management functionality, the system includes a dedicated IT admin portal. This portal caters specifically to 'IT' related complaints, streamlining the reporting and resolution of technology-related issues. Collaborative Success: While leading this project, I collaborated closely with cross-functional teams, including stakeholders from inspection, storeroom, technical, and accounts departments. The project stands as a testament to my skills in project management, system design, and innovative problem-solving. I am proud to have contributed as a team leader and developer to the creation of a solution that not only addresses immediate challenges but also lays the foundation for a more streamlined and responsive university infrastructure.
+
+Skills: 
+	Software Projects · Startups · Problem Solving · Troubleshooting · Stack · Schemas · Databases · CodeIgniter · HTML5 · Cascading Style Sheets (CSS) · Bootstrap (Framework) · Machine Learning · Python (Programming Language) · PHP · JavaScript
 
 *******************
 Server Requirements
@@ -31,40 +36,14 @@ Server Requirements
 
 PHP version 5.6 or newer is recommended.
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
-
 ************
 Installation
 ************
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
-
-*******
-License
-*******
-
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+Please fetch branch and follow CodeIgniter.
 
 *********
 Resources
 *********
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+-  `Any system with php and mysql server`_
